@@ -21,8 +21,8 @@
     "annotateForClosureCompiler": true,
     "strictMetadataEmit": true,
     "skipTemplateCodegen": true,
-    "flatModuleOutFile": "fs-address.js",
-    "flatModuleId": "fs-address"
+    "flatModuleOutFile": "fs-store.js",
+    "flatModuleId": "fs-store"
   },
   "files": [
     "./index.ts"

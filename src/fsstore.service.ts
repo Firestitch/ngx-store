@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { FsUtil } from '../common/fsutil.service';
+import { FsUtil } from '@firestitch/common';
 
 export class FsStoreObject {
   static readonly EVENT_SET = 'set';
