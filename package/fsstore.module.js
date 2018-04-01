@@ -6,10 +6,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var fsstore_service_1 = require("./fsstore.service");
-var http_1 = require("@angular/common/http");
 var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
+var services_1 = require("./services");
 var FsStoreModule = (function () {
     function FsStoreModule() {
     }
@@ -17,20 +16,20 @@ var FsStoreModule = (function () {
     FsStoreModule.forRoot = function () {
         return {
             ngModule: FsStoreModule_1,
-            providers: [fsstore_service_1.FsStore]
+            providers: [services_1.FsStore]
         };
     };
     FsStoreModule = FsStoreModule_1 = __decorate([
         core_1.NgModule({
             imports: [
                 common_1.CommonModule,
-                http_1.HttpClientModule
             ],
+            exports: [],
+            entryComponents: [],
             declarations: [],
             providers: [
-                fsstore_service_1.FsStore
+                services_1.FsStore
             ],
-            exports: []
         })
     ], FsStoreModule);
     return FsStoreModule;

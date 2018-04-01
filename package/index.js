@@ -75,71 +75,26 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "./fsstore.module.ts":
+/***/ "./classes/index.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
 Object.defineProperty(exports, "__esModule", { value: true });
-var fsstore_service_1 = __webpack_require__("./fsstore.service.ts");
-var http_1 = __webpack_require__("@angular/common/http");
-var core_1 = __webpack_require__("@angular/core");
-var common_1 = __webpack_require__("@angular/common");
-var FsStoreModule = (function () {
-    function FsStoreModule() {
-    }
-    FsStoreModule_1 = FsStoreModule;
-    FsStoreModule.forRoot = function () {
-        return {
-            ngModule: FsStoreModule_1,
-            providers: [fsstore_service_1.FsStore]
-        };
-    };
-    FsStoreModule = FsStoreModule_1 = __decorate([
-        core_1.NgModule({
-            imports: [
-                common_1.CommonModule,
-                http_1.HttpClientModule
-            ],
-            declarations: [],
-            providers: [
-                fsstore_service_1.FsStore
-            ],
-            exports: []
-        })
-    ], FsStoreModule);
-    return FsStoreModule;
-    var FsStoreModule_1;
-}());
-exports.FsStoreModule = FsStoreModule;
+__export(__webpack_require__("./classes/store-object.ts"));
 
 
 /***/ }),
 
-/***/ "./fsstore.service.ts":
+/***/ "./classes/store-object.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__("@angular/core");
-var Observable_1 = __webpack_require__("rxjs/Observable");
-var common_1 = __webpack_require__("@firestitch/common");
 var FsStoreObject = (function () {
     function FsStoreObject(name, event, value) {
         this.name = name;
@@ -152,18 +107,98 @@ var FsStoreObject = (function () {
     return FsStoreObject;
 }());
 exports.FsStoreObject = FsStoreObject;
+
+
+/***/ }),
+
+/***/ "./fsstore.module.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("@angular/core");
+var common_1 = __webpack_require__("@angular/common");
+var services_1 = __webpack_require__("./services/index.ts");
+var FsStoreModule = (function () {
+    function FsStoreModule() {
+    }
+    FsStoreModule_1 = FsStoreModule;
+    FsStoreModule.forRoot = function () {
+        return {
+            ngModule: FsStoreModule_1,
+            providers: [services_1.FsStore]
+        };
+    };
+    FsStoreModule = FsStoreModule_1 = __decorate([
+        core_1.NgModule({
+            imports: [
+                common_1.CommonModule,
+            ],
+            exports: [],
+            entryComponents: [],
+            declarations: [],
+            providers: [
+                services_1.FsStore
+            ],
+        })
+    ], FsStoreModule);
+    return FsStoreModule;
+    var FsStoreModule_1;
+}());
+exports.FsStoreModule = FsStoreModule;
+
+
+/***/ }),
+
+/***/ "./index.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+function __export(m) {
+    for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+Object.defineProperty(exports, "__esModule", { value: true });
+__export(__webpack_require__("./fsstore.module.ts"));
+__export(__webpack_require__("./services/index.ts"));
+__export(__webpack_require__("./classes/index.ts"));
+
+
+/***/ }),
+
+/***/ "./services/fsstore.service.ts":
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__("@angular/core");
+var Rx_1 = __webpack_require__("rxjs/Rx");
+var classes_1 = __webpack_require__("./classes/index.ts");
 var FsStore = (function () {
-    function FsStore(FsUtil) {
-        this.FsUtil = FsUtil;
+    function FsStore() {
         this.storage = window.localStorage;
         this.observers = [];
     }
     FsStore.prototype.observe = function (name) {
         var _this = this;
-        return Observable_1.Observable.create(function (observer) {
+        return Rx_1.Observable.create(function (observer) {
             _this.observers.push(observer);
             if (name) {
-                observer.next(new FsStoreObject(name, FsStoreObject.EVENT_INIT, _this.get(name)));
+                observer.next(new classes_1.FsStoreObject(name, classes_1.FsStoreObject.EVENT_INIT, _this.get(name)));
             }
         }).filter(function (FsStoreObject) {
             return !name || name === FsStoreObject.name;
@@ -185,36 +220,31 @@ var FsStore = (function () {
     FsStore.prototype.set = function (key, value, options) {
         if (options === void 0) { options = {}; }
         this.storage[key] = JSON.stringify(value);
-        this.FsUtil.each(this.observers, function (observer) {
-            observer.next(new FsStoreObject(key, FsStoreObject.EVENT_SET, value));
-        });
+        for (var o = 0; o < this.observers.length; o++) {
+            this.observers[o].next(new classes_1.FsStoreObject(key, classes_1.FsStoreObject.EVENT_SET, value));
+        }
         return this;
     };
     FsStore.prototype.remove = function (key, options) {
         if (options === void 0) { options = {}; }
         delete this.storage[key];
-        this.FsUtil.each(this.observers, function (observer) {
-            observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
-        });
+        for (var o = 0; o < this.observers.length; o++) {
+            this.observers[o].next(new classes_1.FsStoreObject(key, classes_1.FsStoreObject.EVENT_REMOVE));
+        }
         return this;
     };
     FsStore.prototype.clear = function () {
-        var _loop_1 = function (i) {
-            var key = this_1.storage.key(i);
-            this_1.FsUtil.each(this_1.observers, function (observer) {
-                observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
-            });
-        };
-        var this_1 = this;
         for (var i = 0; i < this.storage.length; i++) {
-            _loop_1(i);
+            var key = this.storage.key(i);
+            for (var o = 0; o < this.observers.length; o++) {
+                this.observers[o].next(new classes_1.FsStoreObject(key, classes_1.FsStoreObject.EVENT_REMOVE));
+            }
         }
         this.storage.clear();
         return this;
     };
     FsStore = __decorate([
-        core_1.Injectable(),
-        __metadata("design:paramtypes", [common_1.FsUtil])
+        core_1.Injectable()
     ], FsStore);
     return FsStore;
 }());
@@ -223,7 +253,7 @@ exports.FsStore = FsStore;
 
 /***/ }),
 
-/***/ "./index.ts":
+/***/ "./services/index.ts":
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -232,8 +262,7 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(__webpack_require__("./fsstore.module.ts"));
-__export(__webpack_require__("./fsstore.service.ts"));
+__export(__webpack_require__("./services/fsstore.service.ts"));
 
 
 /***/ }),
@@ -245,13 +274,6 @@ module.exports = require("@angular/common");
 
 /***/ }),
 
-/***/ "@angular/common/http":
-/***/ (function(module, exports) {
-
-module.exports = require("@angular/common/http");
-
-/***/ }),
-
 /***/ "@angular/core":
 /***/ (function(module, exports) {
 
@@ -259,17 +281,10 @@ module.exports = require("@angular/core");
 
 /***/ }),
 
-/***/ "@firestitch/common":
+/***/ "rxjs/Rx":
 /***/ (function(module, exports) {
 
-module.exports = require("@firestitch/common");
-
-/***/ }),
-
-/***/ "rxjs/Observable":
-/***/ (function(module, exports) {
-
-module.exports = require("rxjs/Observable");
+module.exports = require("rxjs/Rx");
 
 /***/ })
 

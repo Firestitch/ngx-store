@@ -1,0 +1,8 @@
+<button mat-raised-button color="primary" (click)="get()">Get</button>
+<button mat-raised-button color="primary" (click)="set()">Set</button>
+<button mat-raised-button color="primary" (click)="clear()">Clear</button>
+
+<fieldset>
+  <legend>Data</legend>
+  {{data|json}}
+</fieldset>

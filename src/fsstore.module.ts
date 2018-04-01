@@ -1,24 +1,20 @@
-import { FsStore } from './fsstore.service';
-import { HttpClientModule } from '@angular/common/http';
-
-import { JsonpModule } from '@angular/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FsStore } from './services';
 
 @NgModule({
   imports: [
     CommonModule,
-    HttpClientModule
   ],
-declarations: [
-],
-providers: [
-  FsStore
-],
-exports: [
-
-]
+  exports: [
+  ],
+  entryComponents: [
+  ],
+  declarations: [
+  ],
+  providers: [
+    FsStore
+  ],
 })
 export class FsStoreModule {
   static forRoot(): ModuleWithProviders {

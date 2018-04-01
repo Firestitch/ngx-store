@@ -1,2 +1,3 @@
 export * from './fsstore.module';
-export * from './fsstore.service';
+export * from './services';
+export * from './classes';
