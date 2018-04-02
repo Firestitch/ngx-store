@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs/Rx';
-import { filter } from 'rxjs/operator/filter';
 import { FsStoreObject } from '../classes';
 
 @Injectable()
@@ -39,18 +38,19 @@ export class FsStore {
 
   set(key, value, options: Object = {}) {
     this.storage[key] = JSON.stringify(value);
-    for (let o = 0; o < this.observers.length; o++) {
-      this.observers[o].next(new FsStoreObject(key, FsStoreObject.EVENT_SET, value));
-    }
+    this.observers.forEach((observer) => {
+      observer.next(new FsStoreObject(key, FsStoreObject.EVENT_SET, value));
+    });
 
     return this;
   }
 
   remove(key, options: Object = {}) {
     delete this.storage[key];
-    for (let o = 0; o < this.observers.length; o++) {
-      this.observers[o].next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
-    }
+    this.observers.forEach((observer) => {
+      observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
+    });
+
     return this;
   }
 
