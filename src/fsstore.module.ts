@@ -1,6 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FsStore } from './services';
 
 @NgModule({
   imports: [
@@ -12,15 +11,13 @@ import { FsStore } from './services';
   ],
   declarations: [
   ],
-  providers: [
-    FsStore
-  ],
+  providers: [],
 })
 export class FsStoreModule {
   static forRoot(): ModuleWithProviders {
     return {
       ngModule: FsStoreModule,
-      providers: [FsStore]
+      providers: []
     };
   }
 }
