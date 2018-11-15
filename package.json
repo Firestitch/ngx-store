@@ -1,6 +1,6 @@
 {
   "name": "@firestitch/store",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "package/index.js",
   "typings": "package/index.d.ts",
   "scripts": {

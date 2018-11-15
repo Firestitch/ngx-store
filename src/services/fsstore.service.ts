@@ -53,7 +53,7 @@ export class FsStore {
 
   remove(key, options: Object = {}) {
     delete this.storage[key];
-    this.observers.forEach((observer) => {
+    this.getObservers().forEach((observer) => {
       observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
     });
 
@@ -63,9 +63,9 @@ export class FsStore {
   clear() {
     for (let i = 0; i < this.storage.length; i++) {
       const key = this.storage.key(i);
-      for (let o = 0; o < this.observers.length; o++) {
-        this.observers[o].next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
-      }
+      this.getObservers().forEach((observer) => {
+        observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
+      });
     }
     this.storage.clear();
     return this;
