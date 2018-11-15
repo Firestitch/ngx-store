@@ -5,13 +5,19 @@ import { FsStoreObject } from '../classes';
 @Injectable()
 export class FsStore {
   private storage: any = window.localStorage;
-  private observers: Observer<any>[] = [];
+  private observers: Observer<any>[];
 
-  constructor() {}
+  constructor() {
+    (<any>window).fsStoreObservers = [];
+  }
+
+  private getObservers() {
+    return (<any>window).fsStoreObservers;
+  }
 
   observe(name?: string) {
     return Observable.create((observer: Observer<any>) => {
-      this.observers.push(observer);
+      this.getObservers().push(observer);
       if (name) {
         observer.next(new FsStoreObject(name, FsStoreObject.EVENT_INIT, this.get(name)));
       }
@@ -38,7 +44,7 @@ export class FsStore {
 
   set(key, value, options: Object = {}) {
     this.storage[key] = JSON.stringify(value);
-    this.observers.forEach((observer) => {
+    this.getObservers().forEach((observer) => {
       observer.next(new FsStoreObject(key, FsStoreObject.EVENT_SET, value));
     });
 
