@@ -8,7 +8,9 @@ export class FsStore {
   private observers: Observer<any>[];
 
   constructor() {
-    (<any>window).fsStoreObservers = [];
+    if (!(<any>window).fsStoreObservers) {
+      (<any>window).fsStoreObservers = [];
+    }
   }
 
   private getObservers() {
