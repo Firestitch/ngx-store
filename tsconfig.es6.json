@@ -1,3 +1,0 @@
-{
-  "extends": "./tools/config/tsconfig.es6.json"
-}

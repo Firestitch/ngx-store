@@ -1,3 +1,10 @@
 {
-  "extends": "./tools/config/tsconfig.json"
+  "extends": "./tools/config/tsconfig.cli.json",
+  "compilerOptions": {
+    "paths": {
+      "@firestitch/store": [
+        "src/public_api.ts"
+      ]
+    }
+  }
 }

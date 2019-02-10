@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { FsStore } from '../../../../src';
+import { FsStore } from '@firestitch/store';
+
 
 @Component({
   selector: 'first-example',
@@ -7,7 +8,7 @@ import { FsStore } from '../../../../src';
 })
 export class FirstExampleComponent {
 
-  data = null;
+  public data = null;
   constructor(private FsStore: FsStore) {
     FsStore.observe('data').subscribe((store) => {
       this.data = store.value;
