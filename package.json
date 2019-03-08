@@ -1,6 +1,7 @@
 {
   "name": "@firestitch/store",
-  "version": "0.2.0",
+  "title": "Store",
+  "version": "7.0.0",
   "main": "package/index.js",
   "typings": "package/index.d.ts",
   "scripts": {
@@ -42,8 +43,7 @@
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@compodoc/compodoc": "^1.1.7",
     "@firestitch/common": "^0.5.1",
-    "@firestitch/example": "^0.6.0",
-    "@firestitch/iframe": "^0.2.0",
+    "@firestitch/example": "^7.0.0",
     "@firestitch/message": "^0.2.0",
     "codelyzer": "^4.5.0",
     "cpx": "^1.5.0",
