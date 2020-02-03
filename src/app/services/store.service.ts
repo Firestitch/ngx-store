@@ -14,7 +14,7 @@ export class FsStore {
     }
   }
 
-  public observe(name?: string) {
+  public observe(name?: string): Observable<FsStoreObject> {
     return new Observable((observer: Observer<any>) => {
       this.getObservers().push(observer);
       if (name) {
