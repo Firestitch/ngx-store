@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Observable, Observer } from 'rxjs';
-import { filter } from 'rxjs/operators';
 import { FsStoreObject } from '../classes/store-object';
 
 
@@ -14,21 +13,14 @@ export class FsStore {
     }
   }
 
-  public observe(name?: string): Observable<FsStoreObject> {
+  public observe(name: string): Observable<FsStoreObject> {
     return new Observable((observer: Observer<any>) => {
-      this.getObservers().push(observer);
-      if (name) {
-        observer.next(new FsStoreObject(name, FsStoreObject.EVENT_INIT, this.get(name)));
-      }
-
-    }).pipe(
-      filter(storeObject => {
-        return !name || name === storeObject.name;
-      }),
-    );
+      this._getObservers().push({ name: name, observer: observer });
+      observer.next(new FsStoreObject(name, FsStoreObject.EVENT_INIT, this.get(name)));
+    });
   }
 
-  public get(key, options: Object = {}) {
+  public get(key, options: { default?: boolean } = {}) {
 
     if (this.storage.hasOwnProperty(key)) {
       try {
@@ -36,27 +28,34 @@ export class FsStore {
       } catch (e) {}
     }
 
-    if (options['default'] !== undefined) {
-      return options['default'];
+    if (options.default !== undefined) {
+      return options.default;
     }
 
     return undefined;
   }
 
-  public set(key, value, options: Object = {}) {
-    this.storage[key] = JSON.stringify(value);
-    this.getObservers().forEach((observer) => {
-      observer.next(new FsStoreObject(key, FsStoreObject.EVENT_SET, value));
-    });
+  public set(name, value, options: Object = {}) {
+    this.storage[name] = JSON.stringify(value);
+    this._getObservers()
+      .filter(item => {
+        return item.name === name;
+      }).forEach(item => {
+        item.observer.next(new FsStoreObject(name, FsStoreObject.EVENT_SET, value));
+      });
 
     return this;
   }
 
-  public remove(key, options: Object = {}) {
-    delete this.storage[key];
-    this.getObservers().forEach((observer) => {
-      observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
-    });
+  public remove(name, options: Object = {}) {
+    delete this.storage[name];
+    this._getObservers()
+      .filter(item => {
+        return item.name === name;
+      })
+      .forEach((observer) => {
+        observer.next(new FsStoreObject(name, FsStoreObject.EVENT_REMOVE));
+      });
 
     return this;
   }
@@ -64,15 +63,15 @@ export class FsStore {
   public clear() {
     for (let i = 0; i < this.storage.length; i++) {
       const key = this.storage.key(i);
-      this.getObservers().forEach((observer) => {
-        observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
+      this._getObservers().forEach(item => {
+        item.observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
       });
     }
     this.storage.clear();
     return this;
   }
 
-  private getObservers() {
+  private _getObservers() {
     return (<any>window).fsStoreObservers;
   }
 }
