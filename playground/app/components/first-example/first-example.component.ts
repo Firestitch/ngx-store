@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FsStore } from '@firestitch/store';
+import { FsMessage } from '@firestitch/message';
 
 
 @Component({
@@ -9,21 +10,27 @@ import { FsStore } from '@firestitch/store';
 export class FirstExampleComponent {
 
   public data = null;
-  constructor(private FsStore: FsStore) {
-    FsStore.observe('data').subscribe((store) => {
-      this.data = store.value;
-    });
+  constructor(private _store: FsStore,
+              private _message: FsMessage) {
+    _store.observe('data')
+      .subscribe((store) => {
+        this.data = store.value;
+      });
   }
 
   public clear() {
-    this.FsStore.clear();
+    this._store.clear();
   }
 
   public set() {
-    this.FsStore.set('data', { name: 'John Doe' });
+    this._store.set('data', { name: 'John Doe' });
+  }
+
+  public remove() {
+    this._store.remove('data');
   }
 
   public get() {
-    alert(JSON.stringify(this.FsStore.get('data')));
+    this._message.info(JSON.stringify(this._store.get('data')));
   }
 }

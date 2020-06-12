@@ -1,6 +1,9 @@
-<button mat-raised-button color="primary" (click)="get()">Get</button>
-<button mat-raised-button color="primary" (click)="set()">Set</button>
-<button mat-raised-button color="primary" (click)="clear()">Clear</button>
+<div fxLayout="row" fxLayoutGap="5px">
+  <button mat-raised-button color="primary" (click)="get()">Get</button>
+  <button mat-raised-button color="primary" (click)="set()">Set</button>
+  <button mat-raised-button color="primary" (click)="remove()">Remove</button>
+  <button mat-raised-button color="primary" (click)="clear()">Clear</button>
+</div>
 
 <fieldset>
   <legend>Data</legend>

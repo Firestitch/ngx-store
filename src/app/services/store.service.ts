@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable, Observer } from 'rxjs';
-import { FsStoreObject } from '../classes/store-object';
 
+import { Observable, Observer } from 'rxjs';
+
+import { FsStoreObject } from '../classes/store-object';
+import { StoreObserver } from './../interfaces/store-observer';
 
 @Injectable()
 export class FsStore {
-  private storage: any = window.localStorage;
 
-  constructor() {
-    if (!(<any>window).fsStoreObservers) {
-      (<any>window).fsStoreObservers = [];
-    }
-  }
+  private _storage: any = window.localStorage;
+  private _storeObservers = [];
 
   public observe(name: string): Observable<FsStoreObject> {
     return new Observable((observer: Observer<any>) => {
@@ -22,9 +20,9 @@ export class FsStore {
 
   public get(key, options: { default?: boolean } = {}) {
 
-    if (this.storage.hasOwnProperty(key)) {
+    if (this._storage.hasOwnProperty(key)) {
       try {
-        return JSON.parse(this.storage[key]);
+        return JSON.parse(this._storage[key]);
       } catch (e) {}
     }
 
@@ -36,42 +34,44 @@ export class FsStore {
   }
 
   public set(name, value, options: Object = {}) {
-    this.storage[name] = JSON.stringify(value);
+    this._storage[name] = JSON.stringify(value);
     this._getObservers()
-      .filter(item => {
-        return item.name === name;
-      }).forEach(item => {
-        item.observer.next(new FsStoreObject(name, FsStoreObject.EVENT_SET, value));
+      .filter((storeObserver: StoreObserver) => {
+        return storeObserver.name === name;
+      }).forEach((storeObserver: StoreObserver) => {
+        storeObserver.observer.next(new FsStoreObject(name, FsStoreObject.EVENT_SET, value));
       });
 
     return this;
   }
 
   public remove(name, options: Object = {}) {
-    delete this.storage[name];
+    delete this._storage[name];
     this._getObservers()
-      .filter(item => {
+      .filter((item: StoreObserver) => {
         return item.name === name;
       })
-      .forEach((observer) => {
-        observer.next(new FsStoreObject(name, FsStoreObject.EVENT_REMOVE));
+      .forEach((storeObserver: StoreObserver) => {
+        storeObserver.observer.next(new FsStoreObject(name, FsStoreObject.EVENT_REMOVE));
       });
 
     return this;
   }
 
   public clear() {
-    for (let i = 0; i < this.storage.length; i++) {
-      const key = this.storage.key(i);
+    for (let i = 0; i < this._storage.length; i++) {
+      const key = this._storage.key(i);
       this._getObservers().forEach(item => {
         item.observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
       });
     }
-    this.storage.clear();
+    this._storage.clear();
+
     return this;
   }
 
-  private _getObservers() {
-    return (<any>window).fsStoreObservers;
+  private _getObservers(): StoreObserver[] {
+    return this._storeObservers;
   }
+
 }

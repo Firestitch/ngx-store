@@ -18,11 +18,11 @@ import { FirstExampleComponent } from './components/first-example/first-example.
   bootstrap: [ AppComponent ],
   imports: [
     BrowserModule,
-    FsStoreModule,
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
     FsExampleModule.forRoot(),
+    FsStoreModule.forRoot(),
     FsMessageModule.forRoot(),
     ToastrModule.forRoot({ preventDuplicates: true }),
   ],
@@ -31,10 +31,7 @@ import { FirstExampleComponent } from './components/first-example/first-example.
   declarations: [
     AppComponent,
     FirstExampleComponent,
-  ],
-  providers: [
-    FsStore
-  ],
+  ]
 })
 export class PlaygroundModule {
 }
