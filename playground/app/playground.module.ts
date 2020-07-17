@@ -12,6 +12,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { AppMaterialModule } from './material.module';
 import { FirstExampleComponent } from './components/first-example/first-example.component';
+import { PersistanceComponent } from './components/persistance/persistance.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { FirstExampleComponent } from './components/first-example/first-example.
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
+    RouterModule.forRoot([]),
     FsExampleModule.forRoot(),
     FsStoreModule.forRoot(),
     FsMessageModule.forRoot(),
@@ -31,6 +34,7 @@ import { FirstExampleComponent } from './components/first-example/first-example.
   declarations: [
     AppComponent,
     FirstExampleComponent,
+    PersistanceComponent,
   ]
 })
 export class PlaygroundModule {

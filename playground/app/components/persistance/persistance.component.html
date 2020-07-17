@@ -1,0 +1,36 @@
+<fieldset>
+  <legend>Control:</legend>
+
+  <mat-form-field>
+    <mat-label>Data</mat-label>
+    <textarea matInput name="data" [(ngModel)]="data"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Scope (optional)</mat-label>
+    <input matInput name="scope" [(ngModel)]="scope">
+  </mat-form-field>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="storeData()">
+      <mat-icon>save_alt</mat-icon>
+      Store
+    </button>
+    &nbsp;
+    <button mat-raised-button color="accent" (click)="retrieveData()">
+      <mat-icon>restore</mat-icon>
+      Retrieve
+    </button>
+    &nbsp;
+    <button mat-raised-button color="accent" (click)="clear()">
+      <mat-icon>clear</mat-icon>
+      Clear
+    </button>
+  </div>
+</fieldset>
+
+<fieldset>
+  <legend>Stored Data:</legend>
+
+  <pre>{{ storedData | json }}</pre>
+</fieldset>
