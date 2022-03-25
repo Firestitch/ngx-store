@@ -9,7 +9,7 @@ import { FsStore } from './services/store.service';
   ]
 })
 export class FsStoreModule {
-  static forRoot(): ModuleWithProviders {
+  static forRoot(): ModuleWithProviders<FsStoreModule> {
     return {
       ngModule: FsStoreModule,
       providers: [

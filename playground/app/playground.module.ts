@@ -23,7 +23,7 @@ import { RouterModule } from '@angular/router';
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
     FsExampleModule.forRoot(),
     FsStoreModule.forRoot(),
     FsMessageModule.forRoot(),
