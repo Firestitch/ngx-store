@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FsStore } from './store.service';
 
 import { isAfter, subMinutes } from 'date-fns';
-import { pickBy, cloneDeep } from 'lodash-es';
+import { clone } from '@firestitch/common';
 
 import { FsPersistance, FsPersistanceConfig } from '../interfaces/persistance.interface';
 
@@ -35,7 +35,7 @@ export class FsPersistanceStore<T extends FsPersistance = any, TData = any> {
   }
 
   public get value(): { data: TData, date: Date } {
-    return cloneDeep(this._value);
+    return clone(this._value);
   }
 
   public get namespace(): string {
@@ -74,9 +74,15 @@ export class FsPersistanceStore<T extends FsPersistance = any, TData = any> {
     }
 
     if (typeof data === 'object') {
-      data = pickBy(data, (val) => {
-        return val !== null && val !== void 0;
-      });
+      data = Object.keys(data)
+      .reduce((accum, key) => {
+        const val = data[key];
+        if(val !== null && val !== void 0) {
+          accum[key] = val;
+        }
+
+        return accum;
+      }, {});
     }
 
     // if filter in dialog - we should disable persistance
