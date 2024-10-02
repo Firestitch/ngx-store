@@ -23,12 +23,7 @@ export class FsPersistanceStore<T extends FsPersistance = any, TData = any> {
   constructor(
     protected _store: FsStore,
     protected _route: ActivatedRoute,
-  ) {
-    // Initialize store
-    if (!this._store.get(this.STORE_KEY)) {
-      this._store.set(this.STORE_KEY, {});
-    }
-  }
+  ) {}
 
   public get enabled(): boolean {
     return this._enabled;
@@ -75,14 +70,15 @@ export class FsPersistanceStore<T extends FsPersistance = any, TData = any> {
 
     if (typeof data === 'object') {
       data = Object.keys(data)
-      .reduce((accum, key) => {
-        const val = data[key];
-        if(val !== null && val !== void 0) {
-          accum[key] = val;
-        }
+        .reduce((accum, key) => {
+          const val = data[key];
 
-        return accum;
-      }, {});
+          if (val !== null && val !== void 0) {
+            accum[key] = val;
+          }
+
+          return accum;
+        }, {});
     }
 
     // if filter in dialog - we should disable persistance
