@@ -10,7 +10,7 @@
     "package:publish": "cd node_modules/@firestitch/component-tools && npm run cli:package:publish",
     "demo:build": "cd node_modules/@firestitch/component-tools && npm run cli:demo",
     "serve": "cd node_modules/@firestitch/component-tools && npm run cli:serve",
-    "npm-update": "npx npm-check-updates -u \"/@firestitch/\""
+    "npm-update": "npx npm-check-updates -u \"/@firestitch/\" --target semver'"
   },
   "repository": {
     "type": "git",
