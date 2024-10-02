@@ -70,5 +70,6 @@
   },
   "dependencies": {
     "tslib": "^2.0.0"
-  }
+  },
+  "npm-update": "npx npm-check-updates -u \"/@firestitch/\" --target semver'"
 }
