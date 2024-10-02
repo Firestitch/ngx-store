@@ -4,16 +4,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FsExampleModule } from '@firestitch/example';
-import { FsStoreModule, FsStore } from '@firestitch/store';
 import { FsMessageModule } from '@firestitch/message';
+import { FsStoreModule } from '@firestitch/store';
 
-import { ToastrModule } from 'ngx-toastr';
-
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { AppMaterialModule } from './material.module';
 import { FirstExampleComponent } from './components/first-example/first-example.component';
 import { PersistanceComponent } from './components/persistance/persistance.component';
-import { RouterModule } from '@angular/router';
+import { AppMaterialModule } from './material.module';
 
 
 @NgModule({
@@ -27,9 +25,6 @@ import { RouterModule } from '@angular/router';
     FsExampleModule.forRoot(),
     FsStoreModule.forRoot(),
     FsMessageModule.forRoot(),
-    ToastrModule.forRoot({ preventDuplicates: true }),
-  ],
-  entryComponents: [
   ],
   declarations: [
     AppComponent,
