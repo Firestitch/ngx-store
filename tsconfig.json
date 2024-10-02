@@ -1,8 +1,8 @@
 {
-  "extends": "./tools/config/tsconfig.cli.json",
+  "extends": "./node_modules/@firestitch/component-tools/config/tsconfig.cli.json",
   "compilerOptions": {
     "paths": {
-      "@firestitch/store": [
+      "@firestitch/prompt": [
         "src/public_api.ts"
       ]
     }
