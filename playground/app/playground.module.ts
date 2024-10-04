@@ -21,7 +21,7 @@ import { AppMaterialModule } from './material.module';
     BrowserAnimationsModule,
     AppMaterialModule,
     FormsModule,
-    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot([], {}),
     FsExampleModule.forRoot(),
     FsStoreModule.forRoot(),
     FsMessageModule.forRoot(),
