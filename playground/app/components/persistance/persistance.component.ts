@@ -2,13 +2,21 @@ import { Component, inject } from '@angular/core';
 import { FsExampleComponent } from '@firestitch/example';
 import { FsMessage } from '@firestitch/message';
 import { FsPersistanceStore } from '@firestitch/store';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
-  selector: 'persistance',
-  templateUrl: 'persistance.component.html',
-  styleUrls: ['persistance.component.scss'],
-  providers: [FsPersistanceStore]
+    selector: 'persistance',
+    templateUrl: 'persistance.component.html',
+    styleUrls: ['persistance.component.scss'],
+    providers: [FsPersistanceStore],
+    standalone: true,
+    imports: [MatFormField, MatLabel, MatInput, FormsModule, MatButton, MatIcon, JsonPipe]
 })
 export class PersistanceComponent {
   private exampleComponent = inject(FsExampleComponent);

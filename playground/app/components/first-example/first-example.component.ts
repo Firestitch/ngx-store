@@ -1,11 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { FsStore } from '@firestitch/store';
 import { FsMessage } from '@firestitch/message';
+import { MatButton } from '@angular/material/button';
+import { JsonPipe } from '@angular/common';
 
 
 @Component({
-  selector: 'first-example',
-  templateUrl: 'first-example.component.html'
+    selector: 'first-example',
+    templateUrl: 'first-example.component.html',
+    standalone: true,
+    imports: [MatButton, JsonPipe]
 })
 export class FirstExampleComponent {
   private _store = inject(FsStore);
