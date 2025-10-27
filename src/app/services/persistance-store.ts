@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { FsStore } from './store.service';
@@ -11,6 +11,9 @@ import { FsPersistance, FsPersistanceConfig } from '../interfaces/persistance.in
 
 @Injectable()
 export class FsPersistanceStore<T extends FsPersistance = any, TData = any> {
+  protected _store = inject(FsStore);
+  protected _route = inject(ActivatedRoute);
+
 
   protected _value: { data: TData, date: Date };
   protected _enabled = false;
@@ -19,11 +22,6 @@ export class FsPersistanceStore<T extends FsPersistance = any, TData = any> {
   protected _persistConfig: FsPersistanceConfig;
 
   protected STORE_KEY: string;
-
-  constructor(
-    protected _store: FsStore,
-    protected _route: ActivatedRoute,
-  ) {}
 
   public get enabled(): boolean {
     return this._enabled;

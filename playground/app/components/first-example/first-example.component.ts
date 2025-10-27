@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FsStore } from '@firestitch/store';
 import { FsMessage } from '@firestitch/message';
 
@@ -8,10 +8,14 @@ import { FsMessage } from '@firestitch/message';
   templateUrl: 'first-example.component.html'
 })
 export class FirstExampleComponent {
+  private _store = inject(FsStore);
+  private _message = inject(FsMessage);
+
 
   public data = null;
-  constructor(private _store: FsStore,
-              private _message: FsMessage) {
+  constructor() {
+    const _store = this._store;
+
     _store.observe('data')
       .subscribe((store) => {
         this.data = store.value;

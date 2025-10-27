@@ -54,6 +54,7 @@
     "@firestitch/label": "^18.0.1",
     "@firestitch/menu": "^18.0.5",
     "@firestitch/message": "^18.0.0",
+    "@firestitch/store": "^18.0.0",
     "hammerjs": "^2.0.8",
     "lodash-es": "^4.17.15",
     "rxjs": "^7.5.6",

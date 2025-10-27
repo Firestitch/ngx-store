@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FsExampleComponent } from '@firestitch/example';
 import { FsMessage } from '@firestitch/message';
 import { FsPersistanceStore } from '@firestitch/store';
@@ -11,17 +11,17 @@ import { FsPersistanceStore } from '@firestitch/store';
   providers: [FsPersistanceStore]
 })
 export class PersistanceComponent {
+  private exampleComponent = inject(FsExampleComponent);
+  private message = inject(FsMessage);
+  private store = inject(FsPersistanceStore);
+
 
   public config = {};
   public data;
   public scope;
   public storedData = {};
 
-  constructor(
-    private exampleComponent: FsExampleComponent,
-    private message: FsMessage,
-    private store: FsPersistanceStore,
-  ) {
+  constructor() {
     this.store.setConfig(true, 'default');
   }
 
