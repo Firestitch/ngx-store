@@ -13,8 +13,16 @@ export class FsStore {
 
   public observe(name: string): Observable<FsStoreObject> {
     return new Observable((observer: Observer<any>) => {
-      this._getObservers().push({ name: name, observer: observer });
+      const storeObserver: StoreObserver = { name: name, observer: observer };
+      this._getObservers().push(storeObserver);
       observer.next(new FsStoreObject(name, FsStoreObject.EVENT_INIT, this.get(name)));
+
+      return () => {
+        const index = this._getObservers().indexOf(storeObserver);
+        if (index !== -1) {
+          this._getObservers().splice(index, 1);
+        }
+      };
     });
   }
 
@@ -61,7 +69,7 @@ export class FsStore {
   public clear() {
     for (let i = 0; i < this._storage.length; i++) {
       const key = this._storage.key(i);
-      this._getObservers().forEach(item => {
+      [...this._getObservers()].forEach((item) => {
         item.observer.next(new FsStoreObject(key, FsStoreObject.EVENT_REMOVE));
       });
     }
